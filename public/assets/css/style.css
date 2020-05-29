@@ -2,3 +2,18 @@ img {
     height: 200px;
     width: 200px
 }
+
+.navbar {
+    background-color: rgb(255, 187, 109) !important;
+}
+
+.product-name {
+    margin: 2% 0% 0% 0%;
+    font-weight: bold;
+}
+
+.product-price {
+    color: rgb(255, 187, 109);
+    font-weight: bold;
+    margin: 0%;
+}

@@ -2,34 +2,20 @@
     <span class="navbar-brand h1">Eyekeyuh</span>
 </nav>
 
-<div class="container-fluid text-center">
+<div class="container-fluid text-center mt-4 mb-4">
     <h1>Products</h1>
 </div>
 
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-4 text-center">
-            <img src="assets/img/chair.jpg">
-            <p>Name</p>
-            <p>Price</p>
-        </div>
-        <div class="col-4">
-            <img src="assets/img/couch.jpg">
-        </div>
-        <div class="col-4">
-            <img src="assets/img/modern_bed.jpg">
-        </div>
-                <div class="col-4 text-center">
-            <img src="assets/img/chair.jpg">
-            <p>Name</p>
-            <p>Price</p>
-        </div>
-        <div class="col-4">
-            <img src="assets/img/couch.jpg">
-        </div>
-        <div class="col-4">
-            <img src="assets/img/modern_bed.jpg">
-        </div>
+            {{#each product}}
+                <div class="col-12 col-md-6 col-lg-3 text-center">
+                    <img src={{image}}>
+                    <p class="product-name">{{name}}</p>
+                    <p class="product-price">{{price}}</p>
+                    <p class="product-stock">Remaining: {{stock}}</p>
+                </div>
+            {{/each}}
     </div>
 </div>
