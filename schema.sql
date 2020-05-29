@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS `eyekeyuh`;
+CREATE DATABASE `eyekeyuh`;
