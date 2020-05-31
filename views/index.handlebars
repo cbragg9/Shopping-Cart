@@ -10,10 +10,15 @@
 <div class="container-fluid">
     <div class="row">
             {{#each product}}
-                <div class="col-12 col-md-6 col-lg-3 text-center">
-                    <img src={{image}}>
+                <div class="col-10 offset-1 offset-md-0 offset-lg-0 offset-xl-0 col-md-6 col-lg-3 text-center">
+                    <div class="product">
+                        <img src={{image}} data-id={{id}} alt={{name}} class="product-img">
+                        <div class="add-button-textbox">
+                            <p class="add-button">Add to Cart</p>
+                        </div>
+                    </div>
                     <p class="product-name">{{name}}</p>
-                    <p class="product-price">{{price}}</p>
+                    <p class="product-price">${{price}}</p>
                     <p class="product-stock">Remaining: {{stock}}</p>
                 </div>
             {{/each}}

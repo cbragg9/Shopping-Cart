@@ -1,10 +1,48 @@
 img {
     height: 200px;
-    width: 200px
+    width: 70%
 }
 
 .navbar {
     background-color: rgb(255, 187, 109) !important;
+}
+
+.product {
+    position: relative;
+    overflow: hidden;
+}
+
+.product:hover {
+    opacity: 0.7;
+}
+
+.product:hover .add-button-textbox {
+    transform: translateX(0);
+}
+
+.product-img {
+    width: 100%;
+}
+
+.add-button-textbox {
+    position: absolute;
+    top: 70%;
+    background-color: rgb(255, 187, 109);
+    width: 40%;
+    height: 12%;
+    right: 0%;
+    font-weight: bold;
+    transition: all 0.2s linear;
+    transform: translateX(100%);
+    cursor: pointer;
+}
+
+.add-button {
+    color: black;
+}
+
+.add-button:hover {
+    color: white;
 }
 
 .product-name {
@@ -16,4 +54,20 @@ img {
     color: rgb(255, 187, 109);
     font-weight: bold;
     margin: 0%;
+}
+
+/* Landing css */
+.banner {
+    background-color: rgb(255, 255, 255, 0.7);
+    position: absolute;
+    top: 40%;
+}
+
+.shop-button {
+    background-color: rgb(255, 187, 109);
+    font-weight: bold;
+}
+
+.shop-button:hover {
+    color: white;
 }

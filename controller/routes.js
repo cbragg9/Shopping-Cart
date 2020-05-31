@@ -4,8 +4,10 @@ const Inventory = require("../models/inventory");
 const { Op } = require("sequelize");
 
 
-router.get("/", function (req, res) {
+router.get("/shop", function (req, res) {
     Inventory.findAll().then(function(data) {
+
+        // SQL object needed to be reformatted into an array for handlebars to work
         let dataArray = [];
 
         for (var i = 0; i < data.length; i++) {
@@ -22,9 +24,13 @@ router.get("/", function (req, res) {
         let hbsObject = {
             product: dataArray
         };
-        console.log(hbsObject)
+
         res.render("index", hbsObject);
     })
+})
+
+router.get("/", function (req, res) {
+    res.render("landing");
 })
 
 
