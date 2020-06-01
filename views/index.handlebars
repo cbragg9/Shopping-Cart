@@ -1,5 +1,6 @@
 <nav class="navbar navbar-light bg-light">
     <span class="navbar-brand h1">Eyekeyuh</span>
+    <i class="fas fa-shopping-cart fa-lg"></i>
 </nav>
 
 <div class="container-fluid text-center mt-4 mb-4">
@@ -9,18 +10,51 @@
 
 <div class="container-fluid">
     <div class="row">
-            {{#each product}}
-                <div class="col-10 offset-1 offset-md-0 offset-lg-0 offset-xl-0 col-md-6 col-lg-3 text-center">
-                    <div class="product">
-                        <img src={{image}} data-id={{id}} alt={{name}} class="product-img">
-                        <div class="add-button-textbox">
-                            <p class="add-button">Add to Cart</p>
-                        </div>
-                    </div>
-                    <p class="product-name">{{name}}</p>
-                    <p class="product-price">${{price}}</p>
-                    <p class="product-stock">Remaining: {{stock}}</p>
+        {{#each product}}
+        <div class="col-10 offset-1 offset-md-0 offset-lg-0 offset-xl-0 col-md-6 col-lg-3 text-center">
+            <div class="product">
+                <img src={{image}} alt={{name}} class="product-img">
+                <div class="add-button-textbox">
+                    <p class="add-button" data-id={{id}} id="add-{{id}}">Add to Cart</p>
                 </div>
-            {{/each}}
+            </div>
+            <p class="product-name">{{name}}</p>
+            <p class="product-price">${{price}}</p>
+            <p class="product-stock">Remaining: {{stock}}</p>
+        </div>
+        {{/each}}
     </div>
+</div>
+
+<div class="modal fade" id="cart-modal" tabindex="-1" role="dialog" aria-labelledby="cart-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cart-modal-label">Shopping Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row" id="append-products-here">
+            {{!-- <div class="col-6">
+                <img src="assets/img/chair.jpg">
+            </div>
+            <div class="col-4">
+                <p>Name</p>
+                <p>Price</p>
+            </div>
+            <div class="col-2 text-center">
+                <i class="fas fa-chevron-up"></i>
+                <p>1</p>
+                <i class="fas fa-chevron-down"></i>
+            </div> --}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn checkout-button">Checkout</button>
+      </div>
+    </div>
+  </div>
 </div>

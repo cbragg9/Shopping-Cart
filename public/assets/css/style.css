@@ -7,6 +7,11 @@ img {
     background-color: rgb(255, 187, 109) !important;
 }
 
+.fa-shopping-cart:hover {
+    color: white;
+    cursor: pointer;
+}
+
 .product {
     position: relative;
     overflow: hidden;
@@ -17,6 +22,10 @@ img {
 }
 
 .product:hover .add-button-textbox {
+    transform: translateX(0);
+}
+
+.product:hover .in-cart-textbox {
     transform: translateX(0);
 }
 
@@ -35,6 +44,18 @@ img {
     transition: all 0.2s linear;
     transform: translateX(100%);
     cursor: pointer;
+}
+
+.in-cart-textbox {
+    position: absolute;
+    top: 70%;
+    background-color: rgb(255, 187, 109);
+    width: 40%;
+    height: 12%;
+    right: 0%;
+    font-weight: bold;
+    transition: all 0.2s linear;
+    transform: translateX(100%);
 }
 
 .add-button {
@@ -70,4 +91,19 @@ img {
 
 .shop-button:hover {
     color: white;
+}
+
+/* Shopping Cart */
+.checkout-button {
+    background-color: rgb(255, 187, 109);
+    font-weight: bold;
+}
+
+.checkout-button:hover {
+    color: white;
+    background-color: rgb(248, 213, 147);
+}
+
+.cart-image {
+    width: 100%;
 }

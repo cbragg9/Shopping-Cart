@@ -71,5 +71,4 @@ Inventory.sync();
 //     image: "assets/img/computer_desk.jpg"
 // })
 
-
 module.exports = Inventory;
