@@ -1,6 +1,6 @@
 $(function () {
 
-    // Retrieves all products in the database and stores them in a product array to use the product info later
+    // On page load, retrieves all products in the database and stores them in a product array to use the product info later
     let productArray = [];
     getProducts();
     function getProducts() {
@@ -12,7 +12,7 @@ $(function () {
         });
     }
 
-    // Retrieves all products in the local storage cart or if storage is empty, sets the cart to be an empty array
+    // On page load, retrieves all products in the local storage cart or if storage is empty, sets the cart to be an empty array
     let cart = [];
     if (localStorage.getItem("cart")) {
         cart = JSON.parse(localStorage.getItem("cart"));
@@ -64,13 +64,20 @@ $(function () {
         changeButton(event.target);
     })
 
-    // Changes "Add to Cart" to "In Cart"
-    function changeButton(target) {
+    // Changes "Add to Cart" to "In Cart" and vice versa if product was removed from cart
+    function changeButton(target, use) {
         let parentDiv = $(target).parent();
-        parentDiv.removeClass("add-button-textbox");
-        parentDiv.addClass("in-cart-textbox");
-        $(target).text("In Cart");
-        $(target).removeClass("add-button");
+        if (use == "removed") {
+            parentDiv.removeClass("in-cart-textbox");
+            parentDiv.addClass("add-button-textbox");
+            $(target).text("Add to Cart");
+            $(target).addClass("add-button");
+        } else {
+            parentDiv.removeClass("add-button-textbox");
+            parentDiv.addClass("in-cart-textbox");
+            $(target).text("In Cart");
+            $(target).removeClass("add-button");
+        }
     }
 
     // Push product to shopping cart array when clicked, save to local storage
@@ -80,7 +87,6 @@ $(function () {
                 var product = productArray[i];
                 product.cartQuantity = 1;
             }
-
         }
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -123,6 +129,17 @@ $(function () {
         localStorage.setItem("cart", JSON.stringify(cart));
         calculateTotals();
     })
+
+    // Remove item from cart with product ID, revert Add to Cart button and re-render the shopping cart
+    $(document).on("click", ".remove-item", function (event) {
+        let productID = $(event.target).data("id");
+        let addToCartButtonID = $("#add-" + productID);
+        cart = cart.filter(product => product.id != productID);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        changeButton(addToCartButtonID, "removed");
+        renderCartHTML();
+        calculateTotals();
+    });
 });
 
 
