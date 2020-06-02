@@ -4,7 +4,7 @@ $(function () {
     let productArray = [];
     getProducts();
     function getProducts() {
-        $.get("/api/products", function(data) {
+        $.get("/api/products", function (data) {
             for (let i = 0; i < data.length; i++) {
                 data[i].cartQuantity = 0;
             }
@@ -35,28 +35,28 @@ $(function () {
         if (cart) {
             $("#append-products-here").empty();
             for (let i = 0; i < cart.length; i++) {
-                let newProductHTML = 
-                `<div class="col-4 mb-2">
+                let newProductHTML =
+                    `<div class="col-4 mb-2">
                     <img src=${cart[i].image} class="cart-image">
                 </div>
                 <div class="col-6">
                     <p class="modal-info">${cart[i].name}</p>
                     <p class="modal-info">$${cart[i].price}</p>
-                    <p>Remove</p>
+                    <p class="remove-item" data-id=${cart[i].id}>Remove</p>
                 </div>
                 <div class="col-2 text-center">
-                    <i class="fas fa-chevron-up"></i>
-                    <p id="${cart[i].id}-quantity">1</p>
-                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-chevron-up" data-id=${cart[i].id}></i>
+                    <p id="${cart[i].id}-quantity">${cart[i].cartQuantity}</p>
+                    <i class="fas fa-chevron-down" data-id=${cart[i].id}></i>
                 </div>`
-        
+
                 $("#append-products-here").append(newProductHTML);
             }
         }
     }
 
     // Adds the product to the cart if it hasn't been added yet
-    $(".add-button").on("click", function(event) {
+    $(".add-button").on("click", function (event) {
         const productId = $(this).attr("data-id");
         if ($(this).attr("class") == "add-button") {
             addToCart(productId);
@@ -80,18 +80,49 @@ $(function () {
                 var product = productArray[i];
                 product.cartQuantity = 1;
             }
-            
+
         }
         cart.push(product);
         localStorage.setItem("cart", JSON.stringify(cart));
     }
-    
-    // Display Modal
-    $(".fa-shopping-cart").on("click", function(event) {
+
+    // Display Shopping Cart Modal
+    $(".fa-shopping-cart").on("click", function (event) {
         renderCartHTML();
+        calculateTotals();
         $('#cart-modal').modal("show");
     })
 
+    // Calculate totals and display in modal
+    function calculateTotals() {
+        let subtotal = 0;
+        for (let i = 0; i < cart.length; i++) {
+            subtotal += cart[i].cartQuantity * cart[i].price;
+        }
+        let tax = subtotal * 0.1;
+        let total = subtotal + tax;
+
+        $("#subtotal").text(`Subtotal: $ ${subtotal.toFixed(2)}`);
+        $("#tax").text(`Tax (10%): $ ${tax.toFixed(2)}`);
+        $("#total").text(`Total: $ ${total.toFixed(2)}`);
+    }
+
+    // Increment/Decrement shopping cart quantities on chevron clicks, save changes to local storage 
+    $(document).on("click", ".fa-chevron-up, .fa-chevron-down", function (event) {
+        let targetClass = $(event.target).attr("class");
+        let productID = $(event.target).data("id");
+        let currentQuantity = parseInt($(`#${productID}-quantity`).text());
+        if (targetClass.includes("up")) {
+            currentQuantity++;
+        } else if (currentQuantity > 1) {
+            currentQuantity--;
+        }
+        $(`#${productID}-quantity`).text(currentQuantity);
+
+        cart.forEach(product => { if (product.id == productID) product.cartQuantity = currentQuantity });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        calculateTotals();
+    })
 });
 
 
