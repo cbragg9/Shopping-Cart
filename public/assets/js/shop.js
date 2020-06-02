@@ -140,6 +140,19 @@ $(function () {
         renderCartHTML();
         calculateTotals();
     });
+
+    // On checkout, call routes to update SQL database with updated stock
+    $(document).on("click", ".checkout-button", function (event) {
+        $.ajax({
+            type: "PUT",
+            url: "/api/checkout",
+            data: {'id' : cart},
+        }).then(function(res) {
+            localStorage.clear();
+            alert("Success! Reloading page...")
+            location.reload();
+        })
+    })
 });
 
 
