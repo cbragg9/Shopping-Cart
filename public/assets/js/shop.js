@@ -40,8 +40,8 @@ $(function () {
                     <img src=${cart[i].image} class="cart-image">
                 </div>
                 <div class="col-6">
-                    <p>${cart[i].name}</p>
-                    <p>${cart[i].price}</p>
+                    <p class="modal-info">${cart[i].name}</p>
+                    <p class="modal-info">$${cart[i].price}</p>
                     <p>Remove</p>
                 </div>
                 <div class="col-2 text-center">
